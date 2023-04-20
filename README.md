@@ -2,6 +2,9 @@
 <p>NeuSpell: A Neural Spelling Correction Toolkit
 </h1>
 
+# DISCLAIMER
+Neuspell itself looks dead and has some critical bugs. I'll try to fix some of them here.
+
 # Contents
 
 - [Installation & Quick Start](#Installation)
