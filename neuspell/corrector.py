@@ -118,26 +118,18 @@ class Corrector(ABC):
         opfile.close()
         return
 
-    def _from_pretrained(self, ckpt_path=None, vocab_path=None):
-
-        if ckpt_path:
-            self._default_name = os.path.split(ckpt_path)[-1]
-            self.ckpt_path = ckpt_path
-        else:
-            # self._default_name is kept default
-            self.ckpt_path = Corrector.DEFAULT_CHECKPOINT_PATH[self._default_name]
-
+    def from_pretrained(self, ckpt_path, bert_pretrained_name_or_path, vocab_path=None):
+        self._default_name = os.path.split(ckpt_path)[-1]
+        self.ckpt_path = ckpt_path
         self.vocab_path = vocab_path or os.path.join(self.ckpt_path, "vocab.pkl")
+
         if not os.path.isfile(self.vocab_path):  # leads to "FileNotFoundError"
-            download_pretrained_model(self.ckpt_path)
+            raise FileNotFoundError('vocab.pkl file is not found')
 
         self.load_output_vocab(self.vocab_path)
-        self.load_model(self.ckpt_path)
+        self.load_model(self.ckpt_path, bert_pretrained_name_or_path)
 
         return
-
-    def from_pretrained(self, ckpt_path=None, vocab_path=None, **kwargs):
-        self._from_pretrained(ckpt_path=None, vocab_path=None, **kwargs)
 
     def load_output_vocab(self, vocab_path):
         print(f"loading vocab from path:{vocab_path}")

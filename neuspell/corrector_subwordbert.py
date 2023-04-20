@@ -23,9 +23,9 @@ class BertChecker(Corrector):
 
         self.bert_pretrained_name_or_path = "bert-base-cased"
 
-    def load_model(self, ckpt_path):
+    def load_model(self, ckpt_path, bert_pretrained_name_or_path):
         print(f"initializing model")
-        initialized_model = load_model(self.vocab)
+        initialized_model = load_model(self.vocab, bert_pretrained_name_or_path)
         self.model = load_pretrained(initialized_model, self.ckpt_path, device=self.device)
 
     def correct_strings(self, mystrings: List[str], return_all=False) -> List[str]:
