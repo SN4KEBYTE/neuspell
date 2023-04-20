@@ -3,14 +3,12 @@ __author__ = 'Sai Muralidhar Jayanthi, Danish Pruthi, and Graham Neubig'
 __email__ = "jsaimurali001@gmail.com"
 
 from . import seq_modeling
-from . import off_the_shelf
 from .corrector_bertsclstm import BertsclstmChecker
 from .corrector_cnnlstm import CnnlstmChecker
 from .corrector_lstmlstm import NestedlstmChecker
 from .corrector_sclstm import SclstmChecker
 from .corrector_sclstmbert import SclstmbertChecker
 from .corrector_subwordbert import BertChecker
-from .off_the_shelf import *
 from .util import is_module_available
 
 __all__ = []
@@ -41,7 +39,6 @@ else:
         "BertChecker"
     ]
 
-__all__checkers.extend(off_the_shelf.__all__)
 __all__.extend(__all__checkers)
 
 
