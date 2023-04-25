@@ -80,6 +80,7 @@ class BertChecker(Corrector):
         eval_batch_size: int = 32,
         gradient_acc_steps: int = 1,
         new_vocab_list: List = None,
+        **kwargs,
     ):
 
         if new_vocab_list:
@@ -131,7 +132,7 @@ class BertChecker(Corrector):
         t_total = int(len(train_data) / train_batch_size / gradient_acc_steps * N_EPOCHS)
         if t_total == 0:
             t_total = 1
-        optimizer = BertAdam(optimizer_grouped_parameters, lr=5e-5, warmup=0.1, t_total=t_total)
+        optimizer = BertAdam(optimizer_grouped_parameters, **kwargs)
 
         # model to device
         model.to(DEVICE)
